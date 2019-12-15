@@ -1,0 +1,4 @@
+[run]
+branch = True
+source = designer_faimily
+omit = designer_faimily/tests/*
