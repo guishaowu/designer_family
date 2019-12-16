@@ -28,12 +28,11 @@ api_opts = [
         default="noauth2",
         choices=("keystone", "noauth2"),
         deprecated_group="DEFAULT",
-        help="""
-This determines the strategy to use for authentication: keystone or noauth2.
-'noauth2' is designed for testing only, as it does no actual credential
-checking. 'noauth2' provides administrative credentials only if 'admin' is
-specified as the username.
-"""),
+        help=""),
+    cfg.StrOpt(
+        "paste_config",
+        default="api-paste.ini",
+        help=""),
 ]
 
 

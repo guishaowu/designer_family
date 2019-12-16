@@ -53,8 +53,8 @@ def init(conf):
             # tooling creates an empty policy.json but designer_family.conf is
             # actually configured to use [designer_family]/policy_file=policy.yaml
             # with custom rules.
-            if (conf.placement.policy_file != conf.oslo_policy.policy_file and
-                    conf.find_file(conf.placement.policy_file)):
+            if (conf.designer_family.policy_file != conf.oslo_policy.policy_file and
+                    conf.find_file(conf.designer_family.policy_file)):
                 LOG.error('Found [oslo_policy]/policy_file and '
                           '[designer_family]/policy_file and not sure which to use. '
                           'Using [oslo_policy]/policy_file since '
@@ -64,14 +64,14 @@ def init(conf):
         else:
             # Check to see if a custom [designer_family]/policy_file is being used
             # and if so, log a warning to migrate to [oslo_policy]/policy_file.
-            if conf.find_file(conf.placement.policy_file):
+            if conf.find_file(conf.designer_family.policy_file):
                 LOG.warning('[designer_family]/policy_file is deprecated. Use '
                             '[oslo_policy]/policy_file instead.')
             # For backward compatibility use [designer_family]/policy_file. Even if
             # the file does not exist we can specify this since we will load up
             # default rules from code. Once we remove the compat code we can
             # just stop passing the policy_file kwarg to Enforcer.
-            policy_file = conf.placement.policy_file
+            policy_file = conf.designer_family.policy_file
 
         _enforcer = policy.Enforcer(conf, policy_file=policy_file)
         _enforcer.register_defaults(policies.list_rules())
