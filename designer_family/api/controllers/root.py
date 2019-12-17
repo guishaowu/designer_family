@@ -28,7 +28,7 @@ LOG = logging.getLogger(__name__)
 
 
 class RootController(object):
-    @expose(generic=True, template='./../templates/index.html')
+    @expose(generic=True, template='index.html')
     def index(self):
         return dict()
 

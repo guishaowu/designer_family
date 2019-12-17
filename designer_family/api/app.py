@@ -59,11 +59,13 @@ APPCONFIGS = {}
 def setup_app(root, conf):
     app_hooks = [hooks.ConfigHook(conf),
                  hooks.TranslationHook()]
+    template_path = os.path.dirname(__file__) + "/templates"
     return pecan.make_app(
         root,
         hooks=app_hooks,
         wrap_app=middleware.ParsableErrorMiddleware,
-        guess_content_type_from_ext=False
+        guess_content_type_from_ext=False,
+        template_path=template_path
     )
 
 
