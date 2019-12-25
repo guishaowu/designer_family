@@ -18,6 +18,6 @@
 
 See http://pecan.readthedocs.org/en/latest/deployment.html for details.
 """
-from aodh.api import app
+from designer_family.api import app
 
 application = app.build_wsgi_app(argv=[])

@@ -13,7 +13,9 @@
 
 from oslo_db.sqlalchemy import models
 from oslo_log import log as logging
+from sqlalchemy import Boolean
 from sqlalchemy import Column
+from sqlalchemy import DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Float
 from sqlalchemy import ForeignKey
@@ -22,6 +24,7 @@ from sqlalchemy import Integer
 from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import String
+from sqlalchemy import Text
 from sqlalchemy import Unicode
 
 LOG = logging.getLogger(__name__)
@@ -229,3 +232,40 @@ class Consumer(BASE):
     project_id = Column(Integer, nullable=False)
     user_id = Column(Integer, nullable=False)
     generation = Column(Integer, nullable=False, server_default="0", default=0)
+
+
+class Designer(BASE):
+    """Represents a designer."""
+
+    __tablename__ = 'designers'
+
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    skills = Column(Text, nullable=True)
+    work_experiences = Column(Text, nullable=True)
+    education_experiences = Column(Text, nullable=True)
+    awards = Column(Text, nullable=True)
+    score = Column(Integer, nullable=True)
+    contract = Column(Boolean, default=False)
+    authentication = Column(Boolean, default=False)
+    address = Column(String(100), nullable=True)
+    salary = Column(Integer, nullable=True)
+    project_rate = Column(Integer, nullable=True)
+    tags = Column(String(200))
+    projects = orm.relationship(
+        "ConstructionProject", backref='Designer')
+
+
+class ConstructionProject(BASE):
+    """Represents a constrction project."""
+
+    __tablename__ = 'construction_projects'
+
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    area = Column(Float)
+    city = Column(String(20), nullable=True)
+    tags = Column(String(200), nullable=True)
+    team = Column(String(100), nullable=True)
+    design_time = Column(DateTime, nullable=True)
+    designer_id = Column(Integer, ForeignKey('designers.id'))

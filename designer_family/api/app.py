@@ -199,3 +199,5 @@ def build_wsgi_app(argv=None):
             logging.DEBUG)
 
     return load_app(config)
+
+application = build_wsgi_app()

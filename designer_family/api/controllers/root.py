@@ -1,10 +1,5 @@
 #
-# Copyright 2012 New Dream Network, LLC (DreamHost)
-# Copyright 2013 IBM Corp.
-# Copyright 2013 eNovance <licensing@enovance.com>
-# Copyright Ericsson AB 2013. All rights reserved
-# Copyright 2014 Hewlett-Packard Company
-# Copyright 2015 Huawei Technologies Co., Ltd.
+# Copyright 2020
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -18,16 +13,18 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from designer_family.api.controllers.v2 import capabilities
 from pecan import expose, redirect, request
 from webob.exc import status_map
 import logging
 import uuid
 import shutil
+from designer_family.api.controllers import allocation
 LOG = logging.getLogger(__name__)
 
 
 class RootController(object):
+    allocations = allocation.AllocationController()
+
     @expose(generic=True, template='index.html')
     def index(self):
         return dict()
