@@ -1,2 +1,2 @@
 # designer_family
-test web 
+test web pecan  wsgi
