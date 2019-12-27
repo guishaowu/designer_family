@@ -269,3 +269,9 @@ class ConstructionProject(BASE):
     team = Column(String(100), nullable=True)
     design_time = Column(DateTime, nullable=True)
     designer_id = Column(Integer, ForeignKey('designers.id'))
+
+
+class Person(BASE):
+    __tablename__ = 'person'
+    user_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(255), nullable=False)
